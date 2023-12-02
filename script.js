@@ -8,7 +8,7 @@ function createAudioObject(soundName) {
 
 
 //Assigning variables for the game
-let timer = 2000;
+let timer = 4000;
 let buttonQueue = [];
 let playerScore = 0;
 let highScore = 0;
@@ -28,9 +28,9 @@ buttons.forEach((button) => {
             setTimeout(() => {
                 playerScore = 0;
                 buttonQueue = [];
-                timer = 2000;
+                timer = 4000;
                 $("h1").text(`Press A Key to Start`);
-            }, 1000);
+            }, 3000);
         } else {
             createAudioObject(button).play();
             buttonQueue.shift();
@@ -51,7 +51,10 @@ function gamePlay() {
         setTimeout(() => {
             let button = randomButton();
             buttonQueue.push(button);
-            $(`#${button}`).hide(400).show(400);
+            $(`#${button}`).addClass("blink");
+            setTimeout(() => {
+                $(`#${button}`).removeClass("blink");
+            }, 300);
             createAudioObject(button).play();
             timer -= 5;
             if (timer <= 30) timer = 30;
