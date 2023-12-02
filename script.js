@@ -42,7 +42,7 @@ buttons.forEach((button) => {
 
 //Creating the game sequence
 function randomButton() {
-    let list = ["blue", "green", "red", "yellow"];
+    let list = ["#blue", "#green", "#red", "#yellow"];
     return list[Math.floor(Math.random() * list.length)];
 }
 
@@ -51,16 +51,11 @@ function gamePlay() {
         setTimeout(() => {
             let button = randomButton();
             buttonQueue.push(button);
-            $(`#${button}`).fadeOut(400).fadeIn(400);
+            //$(button).fadeOut(40).fadeIn(40);
             createAudioObject(button).play();
             timer -= 5;
-
-            if (timer <= 30) {
-                timer = 30;
-                gamePlay(); // Call gamePlay recursively to continue the sequence
-            } else {
-                gamePlay();
-            }
+            if (timer <= 30) timer = 30;
+            gamePlay();
         }, timer);
     }
 }
